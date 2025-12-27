@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P人变J计划小帮手</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <h1 class="title">🎯 P人变J计划小帮手</h1>
+            <button class="settings-btn" id="settingsBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3m15.364 6.364l-4.243-4.243m-4.242 0L5.636 17.364m12.728 0l-4.243-4.243m-4.242 0L5.636 6.636"></path>
+                </svg>
+                设置
+            </button>
+        </header>
+
+        <!-- 聊天界面（默认显示） -->
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome-message">
+                    <h2>🎯 欢迎使用 P人变J计划小帮手！</h2>
+                    <p>我是你的专属任务管理助手，可以帮助你：</p>
+                    <div class="feature-list">
+                        <div class="feature-item">📋 接收并拆解你的任务</div>
+                        <div class="feature-item">📅 制定详细的执行计划</div>
+                        <div class="feature-item">✅ 每天汇报进度，给予鼓励</div>
+                        <div class="feature-item">🔄 根据完成情况更新计划</div>
+                    </div>
+                    <p class="welcome-hint">直接告诉我你的任务，让我来帮你规划吧！</p>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <div class="quick-actions" id="quickActions">
+                    <button class="quick-btn" data-action="task">📋 添加新任务</button>
+                    <button class="quick-btn" data-action="report">📊 今日汇报</button>
+                    <button class="quick-btn" data-action="plan">📅 查看计划</button>
+                </div>
+                <div class="chat-input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        class="message-input" 
+                        placeholder="告诉我你的任务，或者直接说「我有个新任务：...」"
+                        rows="1"
+                    ></textarea>
+                    <button class="send-btn" id="sendBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设置面板（默认隐藏） -->
+        <div class="settings-panel" id="settingsPanel" style="display: none;">
+            <div class="settings-content">
+                <h2 class="settings-title">API 配置</h2>
+                <p class="settings-hint" id="configHint">首次使用需要配置 API 信息</p>
+                
+                <div class="form-group">
+                    <label for="apiUrl">API 地址</label>
+                    <input 
+                        type="text" 
+                        id="apiUrl" 
+                        class="form-input" 
+                        placeholder="https://open.bigmodel.cn/api/paas/v4/chat/completions"
+                        value="https://open.bigmodel.cn/api/paas/v4/chat/completions"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="apiKey">API 密钥</label>
+                    <input 
+                        type="password" 
+                        id="apiKey" 
+                        class="form-input" 
+                        placeholder="请输入您的 API 密钥"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="modelName">模型名称</label>
+                    <input 
+                        type="text" 
+                        id="modelName" 
+                        class="form-input" 
+                        placeholder="glm-4"
+                        value="glm-4"
+                    >
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" id="saveConfigBtn">保存配置</button>
+                    <button class="btn btn-secondary" id="backToChatBtn">返回聊天</button>
+                </div>
+
+                <div class="status-message" id="statusMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
